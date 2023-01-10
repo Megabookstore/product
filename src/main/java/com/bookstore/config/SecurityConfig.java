@@ -16,7 +16,7 @@ public class SecurityConfig {
             .cors().and()
             .headers().frameOptions().disable().and()
             .authorizeHttpRequests()
-            .antMatchers("/**").permitAll().and()
+            .anyRequest().permitAll().and()
             .build();
     }
 }
