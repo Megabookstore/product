@@ -1,5 +1,6 @@
 package com.bookstore.product.domain;
 
+import java.math.BigDecimal;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import lombok.Getter;
@@ -15,11 +16,11 @@ public class Price {
     private static final String PRICE_LESS_THAN_ZERO = "가격은 0원보다 작을 수 없습니다.";
 
     @Column(nullable = false)
-    private Long price;
+    private BigDecimal price;
 
     public Price(Long price) {
         validate(price);
-        this.price = price;
+        this.price = BigDecimal.valueOf(price);
     }
 
     private void validate(Long price) {
