@@ -3,12 +3,14 @@ package com.bookstore.product.domain;
 import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Embeddable
 @NoArgsConstructor
 @Getter
+@EqualsAndHashCode
 public class Stock {
 
     private static final int ZERO = 0;

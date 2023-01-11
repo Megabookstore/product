@@ -1,14 +1,17 @@
 package com.bookstore.product.domain;
 
 import java.math.BigDecimal;
+import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Embeddable
 @NoArgsConstructor
 @Getter
+@EqualsAndHashCode
 public class Price {
 
     private static final int ZERO = 0;
@@ -31,5 +34,22 @@ public class Price {
         if (price < ZERO) {
             throw new IllegalArgumentException(PRICE_LESS_THAN_ZERO);
         }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Price price1 = (Price) o;
+        return Objects.equals(price, price1.price);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(price);
     }
 }

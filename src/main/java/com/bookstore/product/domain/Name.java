@@ -3,12 +3,14 @@ package com.bookstore.product.domain;
 import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Embeddable
 @NoArgsConstructor
 @Getter
+@EqualsAndHashCode
 public class Name {
 
     private static final String NAME_NOT_EMPTY = "이름은 빈 값을 허용하지 않습니다.";
