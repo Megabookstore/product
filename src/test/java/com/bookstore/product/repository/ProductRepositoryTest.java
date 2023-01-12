@@ -4,6 +4,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
+import com.bookstore.common.exception.NotFoundException;
 import com.bookstore.product.domain.Description;
 import com.bookstore.product.domain.Name;
 import com.bookstore.product.domain.Price;
@@ -11,7 +12,6 @@ import com.bookstore.product.domain.Product;
 import com.bookstore.product.domain.ProductStatus;
 import com.bookstore.product.domain.Stock;
 import com.bookstore.product.dto.ProductRequest;
-import com.bookstore.product.exception.ProductNotFoundException;
 import javax.persistence.EntityManager;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -49,7 +49,7 @@ class ProductRepositoryTest {
     public void register() {
         //when
         Product findProduct = productRepository.findById(product.getId())
-            .orElseThrow(ProductNotFoundException::new);
+            .orElseThrow(NotFoundException::new);
 
         //then
         assertThat(findProduct).isEqualTo(product);
@@ -88,7 +88,7 @@ class ProductRepositoryTest {
         productRepository.delete(product);
 
         //then
-        assertThatThrownBy(() -> productRepository.findById(product.getId()).orElseThrow(ProductNotFoundException::new))
-            .isInstanceOf(ProductNotFoundException.class);
+        assertThatThrownBy(() -> productRepository.findById(product.getId()).orElseThrow(NotFoundException::new))
+            .isInstanceOf(NotFoundException.class);
     }
 }
