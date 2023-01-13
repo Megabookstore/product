@@ -10,6 +10,9 @@ import com.bookstore.product.dto.ProductRequest;
 import com.bookstore.product.dto.ProductResponse;
 import io.restassured.response.ExtractableResponse;
 import io.restassured.response.Response;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -41,6 +44,17 @@ public class ProductAcceptanceTest extends AcceptanceTest {
         상품_생성됨(response);
     }
 
+    @DisplayName("상품을 확인한다.")
+    @Test
+    void listProduct() {
+        ProductResponse productResponse = 상품_생성_요청(productRequest).as(ProductResponse.class);
+
+        ExtractableResponse<Response> response = 상품_목록_조회_요청();
+
+        상품_응답됨(response);
+        상품_목록_확인됨(response, Arrays.asList(productResponse.getId()));
+    }
+
     @DisplayName("상품을 수정한다")
     @Test
     void updateProduct() {
@@ -62,6 +76,19 @@ public class ProductAcceptanceTest extends AcceptanceTest {
 
     private static void 상품_생성됨(ExtractableResponse response) {
         assertThat(response.statusCode()).isEqualTo(HttpStatus.CREATED.value());
+    }
+
+    private static void 상품_응답됨(ExtractableResponse response) {
+        assertThat(response.statusCode()).isEqualTo(HttpStatus.OK.value());
+    }
+
+    private static void 상품_목록_확인됨(ExtractableResponse response, List<Long> productIds) {
+        List<Long> resultIds = response.jsonPath().getList(".", ProductResponse.class)
+            .stream()
+            .map(ProductResponse::getId)
+            .collect(Collectors.toList());
+
+        assertThat(resultIds).containsAll(productIds);
     }
 
     private static void 상품_수정됨(ExtractableResponse response, ProductRequest productRequest) {
