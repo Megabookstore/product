@@ -11,7 +11,6 @@ import lombok.NoArgsConstructor;
 @Embeddable
 @NoArgsConstructor
 @Getter
-@EqualsAndHashCode
 public class Price {
 
     private static final int ZERO = 0;
