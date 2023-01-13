@@ -17,4 +17,14 @@ public class ProductRestAssured {
             .then().log().all()
             .extract();
     }
+
+    public static ExtractableResponse<Response> 상품_수정_요청(Long id, ProductRequest productRequest) {
+        return RestAssured
+            .given().log().all()
+            .body(productRequest)
+            .contentType(MediaType.APPLICATION_JSON_VALUE)
+            .when().put("/product/" + id)
+            .then().log().all()
+            .extract();
+    }
 }
