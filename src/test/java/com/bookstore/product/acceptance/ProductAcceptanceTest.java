@@ -22,6 +22,7 @@ public class ProductAcceptanceTest extends AcceptanceTest {
 
     @BeforeEach
     public void setUp() {
+        super.setUp();
         productRequest = new ProductRequest(
             "애자일 소프트웨어 장인 정신",
             "클린코드",
@@ -56,7 +57,7 @@ public class ProductAcceptanceTest extends AcceptanceTest {
 
         ExtractableResponse<Response> response = 상품_수정_요청(productResponse.getId(), productUpdateRequest);
 
-        상품_수정됨(response, productRequest);
+        상품_수정됨(response, productUpdateRequest);
     }
 
     private static void 상품_생성됨(ExtractableResponse response) {
