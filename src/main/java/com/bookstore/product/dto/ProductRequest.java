@@ -28,6 +28,7 @@ public class ProductRequest {
     private Long price;
 
     public Product toProduct() {
+        ProductStatus productStatus1 = ProductStatus.valueOf(productStatus);
         return Product.builder()
             .description(new Description(description))
             .name(new Name(name))
