@@ -32,7 +32,7 @@ public class ProductService {
     }
 
     public List<ProductResponse> list(Pageable pageable) {
-        Page<Product> products = productRepository.findAll(pageable);
+        Page<Product> products = productRepository.findByProductStatusNot(ProductStatus.DELETE, pageable);
 
         return products.get()
             .map(product -> new ProductResponse(product))
@@ -51,6 +51,14 @@ public class ProductService {
             product.getThumbnail(),
             new Price(productRequest.getPrice())
         );
+
+        return new ProductResponse(product);
+    }
+
+    @Transactional
+    public ProductResponse delete(Long id) {
+        Product product = productFindById(id);
+        product.delete();
 
         return new ProductResponse(product);
     }

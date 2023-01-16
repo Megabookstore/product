@@ -36,4 +36,13 @@ public class ProductRestAssured {
             .then().log().all()
             .extract();
     }
+
+    public static ExtractableResponse<Response> 상품_삭제_요청(Long id) {
+        return RestAssured
+            .given().log().all()
+            .contentType(MediaType.APPLICATION_JSON_VALUE)
+            .when().delete("/product/" + id)
+            .then().log().all()
+            .extract();
+    }
 }

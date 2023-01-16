@@ -10,7 +10,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.Hibernate;
@@ -52,6 +51,10 @@ public class Product extends BaseEntity {
         this.productStatus = productStatus;
         this.thumbnail = thumbnail;
         this.price = price;
+    }
+
+    public void delete() {
+        this.productStatus = ProductStatus.DELETE;
     }
 
     @Override

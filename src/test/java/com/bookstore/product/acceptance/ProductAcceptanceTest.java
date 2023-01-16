@@ -1,11 +1,13 @@
 package com.bookstore.product.acceptance;
 
-import static com.bookstore.product.acceptance.ProductRestAssured.*;
+import static com.bookstore.product.acceptance.ProductRestAssured.상품_목록_조회_요청;
+import static com.bookstore.product.acceptance.ProductRestAssured.상품_삭제_요청;
+import static com.bookstore.product.acceptance.ProductRestAssured.상품_생성_요청;
+import static com.bookstore.product.acceptance.ProductRestAssured.상품_수정_요청;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
 import com.bookstore.common.AcceptanceTest;
-import com.bookstore.product.domain.ProductStatus;
 import com.bookstore.product.dto.ProductRequest;
 import com.bookstore.product.dto.ProductResponse;
 import io.restassured.response.ExtractableResponse;
@@ -22,6 +24,7 @@ import org.springframework.http.HttpStatus;
 public class ProductAcceptanceTest extends AcceptanceTest {
 
     private ProductRequest productRequest;
+    private ProductRequest productDeleteRequest;
 
     @BeforeEach
     public void setUp() {
@@ -31,6 +34,14 @@ public class ProductAcceptanceTest extends AcceptanceTest {
             "클린코드",
             1_100L,
             "SELL",
+            "https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9791198129109.jpg",
+            29_700L
+        );
+        productDeleteRequest = new ProductRequest(
+            "애자일 소프트웨어 장인 정신",
+            "클린코드",
+            1_100L,
+            "DELETE",
             "https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9791198129109.jpg",
             29_700L
         );
@@ -48,6 +59,7 @@ public class ProductAcceptanceTest extends AcceptanceTest {
     @Test
     void listProduct() {
         ProductResponse productResponse = 상품_생성_요청(productRequest).as(ProductResponse.class);
+        ProductResponse productDeleteResponse = 상품_생성_요청(productDeleteRequest).as(ProductResponse.class);;
 
         ExtractableResponse<Response> response = 상품_목록_조회_요청();
 
@@ -72,6 +84,16 @@ public class ProductAcceptanceTest extends AcceptanceTest {
         ExtractableResponse<Response> response = 상품_수정_요청(productResponse.getId(), productUpdateRequest);
 
         상품_수정됨(response, productUpdateRequest);
+    }
+
+    @DisplayName("상품을 삭제한다")
+    @Test
+    void deleteProduct() {
+        ProductResponse productResponse = 상품_생성_요청(productRequest).as(ProductResponse.class);
+
+        ExtractableResponse<Response> response = 상품_삭제_요청(productResponse.getId());
+
+        상품_응답됨(response);
     }
 
     private static void 상품_생성됨(ExtractableResponse response) {
