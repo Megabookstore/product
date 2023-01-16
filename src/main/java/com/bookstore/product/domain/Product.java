@@ -1,5 +1,6 @@
 package com.bookstore.product.domain;
 
+import com.bookstore.book.domain.Description;
 import com.bookstore.common.domain.BaseEntity;
 import java.util.Objects;
 import javax.persistence.Column;

@@ -5,7 +5,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
 import com.bookstore.common.exception.NotFoundException;
-import com.bookstore.product.domain.Description;
+import com.bookstore.book.domain.Description;
 import com.bookstore.product.domain.Name;
 import com.bookstore.product.domain.Price;
 import com.bookstore.product.domain.Product;

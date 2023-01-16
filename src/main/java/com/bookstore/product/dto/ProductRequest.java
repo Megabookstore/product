@@ -1,6 +1,6 @@
 package com.bookstore.product.dto;
 
-import com.bookstore.product.domain.Description;
+import com.bookstore.book.domain.Description;
 import com.bookstore.product.domain.Name;
 import com.bookstore.product.domain.Price;
 import com.bookstore.product.domain.Product;

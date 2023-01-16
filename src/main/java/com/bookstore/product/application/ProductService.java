@@ -1,7 +1,7 @@
 package com.bookstore.product.application;
 
 import com.bookstore.common.exception.NotFoundException;
-import com.bookstore.product.domain.Description;
+import com.bookstore.book.domain.Description;
 import com.bookstore.product.domain.Name;
 import com.bookstore.product.domain.Price;
 import com.bookstore.product.domain.Product;

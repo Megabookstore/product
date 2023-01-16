@@ -1,4 +1,4 @@
-package com.bookstore.product.domain;
+package com.bookstore.book.domain;
 
 import java.util.Objects;
 import javax.persistence.Column;
