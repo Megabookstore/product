@@ -19,4 +19,10 @@ public class Book extends BaseEntity {
 
     @Embedded
     private Title title;
+
+    @Embedded
+    private Description description;
+
+    @Embedded
+    private Contents contents;
 }
