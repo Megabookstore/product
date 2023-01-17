@@ -1,5 +1,6 @@
 package com.bookstore.product.domain;
 
+import com.bookstore.common.constant.ErrorCode;
 import java.math.BigDecimal;
 import java.util.Objects;
 import javax.persistence.Column;
@@ -15,7 +16,6 @@ public class Price {
 
     private static final int ZERO = 0;
 
-    private static final String PRICE_LESS_THAN_ZERO = "가격은 0원보다 작을 수 없습니다.";
 
     @Column(nullable = false)
     private BigDecimal price;
@@ -31,7 +31,7 @@ public class Price {
 
     private void validatePriceLessThanZero(Long price) {
         if (price < ZERO) {
-            throw new IllegalArgumentException(PRICE_LESS_THAN_ZERO);
+            throw new IllegalArgumentException(ErrorCode.PRICE_LESS_THAN_ZERO.getErrorMessage());
         }
     }
 }

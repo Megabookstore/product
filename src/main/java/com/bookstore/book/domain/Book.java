@@ -25,4 +25,7 @@ public class Book extends BaseEntity {
 
     @Embedded
     private Contents contents;
+
+    @Embedded
+    private Publisher publisher;
 }

@@ -1,5 +1,6 @@
 package com.bookstore.book.domain;
 
+import com.bookstore.common.constant.ErrorCode;
 import java.util.Objects;
 import java.util.regex.Pattern;
 import javax.persistence.Column;
@@ -12,9 +13,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class BookNumber {
 
-    private static final String BOOK_NUMBER_NOT_EMPTY = "국제표준도서번호(ISBN)은 빈 값을 허용하지 않습니다.";
 
-    private static final String BOOK_NUMBER_PATTERN = "국제표준도서번호(ISBN)의 유효하지 않은 규칙입니다.";
     private static final Pattern pattern = Pattern.compile("^[0-9\\-]*$");;
 
     @Column(length = 20, nullable = false)
@@ -32,13 +31,13 @@ public class BookNumber {
 
     private void validateBookNumberNotEmpty(String bookNumber) {
         if (Objects.isNull(bookNumber) || bookNumber.isEmpty()) {
-            throw new IllegalArgumentException(BOOK_NUMBER_NOT_EMPTY);
+            throw new IllegalArgumentException(ErrorCode.BOOK_NUMBER_NOT_EMPTY.getErrorMessage());
         }
     }
 
     private void validateBookNumberPattern(String bookNumber) {
         if (!pattern.matcher(bookNumber).matches()) {
-            throw new IllegalArgumentException(BOOK_NUMBER_PATTERN);
+            throw new IllegalArgumentException(ErrorCode.BOOK_NUMBER_PATTERN.getErrorMessage());
         }
     }
 

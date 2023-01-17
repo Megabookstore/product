@@ -1,5 +1,6 @@
 package com.bookstore.book.domain;
 
+import com.bookstore.common.constant.ErrorCode;
 import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
@@ -10,8 +11,6 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 public class Title {
-
-    private static final String TITLE_NOT_EMPTY = "제목은 빈 값을 허용하지 않습니다.";
 
     @Column(nullable = false)
     private String title;
@@ -27,7 +26,7 @@ public class Title {
 
     private void validateTitleNotEmpty(String title) {
         if (Objects.isNull(title) || title.isEmpty()) {
-            throw new IllegalArgumentException(TITLE_NOT_EMPTY);
+            throw new IllegalArgumentException(ErrorCode.TITLE_NOT_EMPTY.getErrorMessage());
         }
     }
 
