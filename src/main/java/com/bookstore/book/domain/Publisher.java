@@ -30,4 +30,20 @@ public class Publisher {
         }
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Publisher publisher1 = (Publisher) o;
+        return Objects.equals(publisher, publisher1.publisher);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(publisher);
+    }
 }

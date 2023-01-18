@@ -11,7 +11,6 @@ import lombok.NoArgsConstructor;
 @Embeddable
 @NoArgsConstructor
 @Getter
-@EqualsAndHashCode
 public class Description {
 
     @Column(length = 1000, nullable = false)
@@ -30,5 +29,22 @@ public class Description {
         if (Objects.isNull(description) || description.isEmpty()) {
             throw new IllegalArgumentException(ErrorCode.DESCRIPTION_NOT_EMPTY.getErrorMessage());
         }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Description that = (Description) o;
+        return Objects.equals(description, that.description);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(description);
     }
 }
