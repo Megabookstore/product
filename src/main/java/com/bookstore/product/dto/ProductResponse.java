@@ -1,12 +1,6 @@
 package com.bookstore.product.dto;
 
-import com.bookstore.book.domain.Description;
-import com.bookstore.product.domain.Name;
-import com.bookstore.product.domain.Price;
 import com.bookstore.product.domain.Product;
-import com.bookstore.product.domain.ProductStatus;
-import com.bookstore.product.domain.Stock;
-import java.math.BigDecimal;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -32,35 +26,11 @@ public class ProductResponse {
 
     public ProductResponse(Product product) {
         this.id = product.getId();
-        this.description = description(product).getDescription();
-        this.name = name(product).getName();
-        this.stock = stock(product).getStock();
-        this.productStatus = productStatus(product).getValue();
+        this.description = product.getDescription().getDescription();
+        this.name = product.getName().getName();
+        this.stock = product.getStock().getStock();
+        this.productStatus = product.getProductStatus().getValue();
         this.thumbnail = product.getThumbnail();
-        this.price = getPrice(product).longValue();
-    }
-
-    public Description description(Product product) {
-        return product.getDescription();
-    }
-
-    public Name name(Product product) {
-        return product.getName();
-    }
-
-    public Stock stock(Product product) {
-        return product.getStock();
-    }
-
-    public ProductStatus productStatus(Product product) {
-        return product.getProductStatus();
-    }
-
-    public Price price(Product product) {
-        return product.getPrice();
-    }
-
-    public BigDecimal getPrice(Product product) {
-        return price(product).getPrice();
+        this.price = product.getPrice().getPrice().longValue();
     }
 }
