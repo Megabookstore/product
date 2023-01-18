@@ -1,4 +1,4 @@
-package com.bookstore.product.domain;
+package com.bookstore.common.domain;
 
 import static com.bookstore.common.constant.ErrorCode.NAME_NOT_EMPTY;
 
